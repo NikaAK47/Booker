@@ -107,4 +107,4 @@ def odlazak():
     return render_template('odlazak.html', reservations=today_reservations, navbar_data=navbar_data, apartment=today_apartments[0] if today_apartments else None)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
