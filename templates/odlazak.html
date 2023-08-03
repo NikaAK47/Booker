@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}U odlasku{% endblock %}
+{% block content %}
+    <div class="container mt-4">
+        <h1>Rezervacije u odlasku</h1>
+        {% if reservations %}
+            <div class="reservation-list">
+                {% for reservation in reservations %}
+                    <div class="reservation-item card reservation-card">
+                        <p>Nositelj rezervacije: <strong>{{ reservation.full_name }}</strong></p>
+                        <p>Dolazak: <strong>{{ reservation.arrival_date | format_date('%d.%m.%Y') }}</strong></p>
+                        <p>Odlazak: <strong><span class="red-text">{{ reservation.departure_date | format_date('%d.%m.%Y') }}</span></strong></p>
+                        <p>Broj osoba: <strong>{{ reservation.num_of_people }}</strong></p>
+                        <div class="edit-buttons d-inline-flex btn-group" role="group">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editReservationModal{{ reservation.id }}">Uredi rezervaciju</button>
+                            <form action="{{ url_for('delete_reservation', apartment_id=apartment.id, reservation_id=reservation.id) }}" method="post">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Jeste li sigurni da želite obrisati ovu rezervaciju?');">Briši rezervaciju</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Nema rezervacija u odlasku.</p>
+        {% endif %}
+    </div>
+    {% include 'reservation_modal.html' %}
+{% endblock %}

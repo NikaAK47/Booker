@@ -1,0 +1,35 @@
+ <div class="modal fade" id="addApartmentModal" tabindex="-1" role="dialog" aria-labelledby="addApartmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addApartmentModalLabel">Dodaj apartman</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ url_for('add_apartment') }}">
+                        <div class="form-group">
+                            <label for="name">Ime apartmana</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Lokacija</label>
+                            <input type="text" class="form-control" id="location" name="location" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Opis</label>
+                            <textarea class="form-control" id="description" name="description" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="image_url">URL slike</label>
+                            <input type="text" class="form-control" id="image_url" name="image_url" required>
+                            <a href="https://postimages.org/" target="_blank">Servis za dodavanje fotografija s računala</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Spremi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+

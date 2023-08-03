@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title%}{{ apartment.name }}{% endblock %}
+{% block content %}
+    <div class="container mt-4">
+        <h1 class="mb-4">{{ apartment.name }}</h1>
+<div class="row">
+    <div class="col-md-2">
+        <form action="{{ url_for('delete_apartment', apartment_id=apartment.id) }}" method="post" onsubmit="return confirm('Jeste li sigurni da želite obrisati ovaj apartman?');">
+            <button type="submit" class="btn btn-danger btn-block">Obriši apartman</button>
+        </form>
+    </div>
+</div>
+        <h2 class="mt-4">Rezervacije za apartman</h2>
+        {% if reservations %}
+            <div class="reservation-list">
+                {% for reservation in reservations %}
+                    <div class="reservation-item card reservation-card">
+                        <p>Nositelj rezervacije: <strong>{{ reservation.full_name }}</strong></p>
+                        <p>Dolazak: <strong>{{ reservation.arrival_date | format_date('%d.%m.%Y') }}</strong></p>
+                        <p>Odlazak: <strong>{{ reservation.departure_date | format_date('%d.%m.%Y') }}</strong></p>
+                        <p>Broj osoba: <strong>{{ reservation.num_of_people }}</strong></p>
+                        <div class="edit-buttons d-inline-flex btn-group" role="group">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editReservationModal{{ reservation.id }}">Uredi rezervaciju</button>
+                            <form action="{{ url_for('delete_reservation', apartment_id=apartment.id, reservation_id=reservation.id) }}" method="post">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Jeste li sigurni da želite obrisati ovu rezervaciju?');">Briši rezervaciju</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Nema rezervacija za ovaj apartman.</p>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,80 @@
+<!-- Modal za dodavanje rezervacije -->
+<div class="modal fade" id="addReservationModal" tabindex="-1" role="dialog" aria-labelledby="addReservationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addReservationModalLabel">Dodaj rezervaciju</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Forma za unos detalja rezervacije -->
+               {% if apartment %}
+    <form action="{{ url_for('add_reservation', apartment_id=apartment.id) }}" method="post">
+{% else %}
+    <p>No apartment data available.</p>
+{% endif %}
+
+                    <div class="form-group">
+                        <label for="full_name">Ime i prezime</label>
+                        <input type="text" class="form-control" id="full_name" name="full_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="num_of_people">Broj osoba</label>
+                        <input type="number" class="form-control" id="num_of_people" name="num_of_people" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="arrival_date">Datum dolaska</label>
+                        <input type="date" class="form-control" id="arrival_date" name="arrival_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="departure_date">Datum odlaska</label>
+                        <input type="date" class="form-control" id="departure_date" name="departure_date" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Spremi rezervaciju</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal za uređivanje rezervacije -->
+{% for reservation in reservations %}
+<div class="modal fade" id="editReservationModal{{ reservation.id }}" tabindex="-1" role="dialog" aria-labelledby="editReservationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editReservationModalLabel">Uredi rezervaciju</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Forma za uređivanje rezervacije -->
+                <form id="editReservationForm{{ reservation.id }}" method="post" action="{{ url_for('edit_reservation', apartment_id=apartment.id, reservation_id=reservation.id) }}">
+                    <input type="hidden" name="_method" value="POST">
+                    <div class="form-group">
+                        <label for="edit_full_name{{ reservation.id }}">Ime i prezime</label>
+                        <input type="text" class="form-control" id="edit_full_name{{ reservation.id }}" name="full_name" required value="{{ reservation.full_name }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_num_of_people{{ reservation.id }}">Broj osoba</label>
+                        <input type="number" class="form-control" id="edit_num_of_people{{ reservation.id }}" name="num_of_people" required value="{{ reservation.num_of_people }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_arrival_date{{ reservation.id }}">Datum dolaska</label>
+                        <input type="date" class="form-control" id="edit_arrival_date{{ reservation.id }}" name="arrival_date" required value="{{ reservation.arrival_date | format_date('%Y-%m-%d') }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_departure_date{{ reservation.id }}">Datum odlaska</label>
+                        <input type="date" class="form-control" id="edit_departure_date{{ reservation.id }}" name="departure_date" required value="{{ reservation.departure_date | format_date('%Y-%m-%d') }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Spremi promjene</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
