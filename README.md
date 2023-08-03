@@ -9,3 +9,15 @@ Pridružite se našoj rastućoj zajednici zadovoljnih booking managera i postani
 
 ## UseCase dijagram
 ![alt text](https://github.com/NikaAK47/Booker/blob/main/Booker.jpeg)
+
+## Instalacija
+```
+cd ~/Downloads
+git clone https://github.com/NikaAK47/Booker
+cd booker
+```
+```
+docker build -t booker .
+docker ps
+docker run -p 5000:5000 booker
+```
