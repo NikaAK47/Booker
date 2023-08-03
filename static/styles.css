@@ -1,0 +1,88 @@
+:root {
+  --primary-color: #FBA1B7;
+  --secondary-color: #FFD1DA;
+  --accent-color: #FFF0F5;
+  --highlight-color: #FFDBAA;
+}
+
+.card-title a{
+    color: var(--primary-color) !important;
+}
+
+.delete-link {
+    color: red !important;
+    text-decoration: none;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--accent-color) !important; 
+    color: #777 !important; 
+}
+
+.content-wrapper {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
+    background-color: var(--primary-color) !important; 
+}
+
+.reservation-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--primary-color) !important; 
+}
+
+.red-text {
+    color: red !important;
+}
+
+.navbar-brand {
+    font-family: 'Satisfy', cursive;
+    font-size: 3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    color: #FFF !important; 
+}
+
+.nav-link {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3rem;
+    color: #FFF !important; 
+}
+
+.footer-logo {
+    font-family: 'Satisfy', cursive;
+    font-size: 1.5rem;
+    color: #FFF !important; 
+    margin: 0;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+        main {
+            flex: 1;
+            padding-top: 70px;
+        }
